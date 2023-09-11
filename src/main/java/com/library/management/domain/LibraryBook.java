@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@DynamicUpdate
 @Data
+@Table(name = "library_book")
 public class LibraryBook {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "book_id", nullable = false)
     private Integer bookID;
 
@@ -27,6 +27,14 @@ public class LibraryBook {
     private Integer numberOfBooks;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "libraryBook", cascade = CascadeType.ALL)
-    private List<Author> authorNames = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private List<Author> authors;
+
+    public void addAuthor(Author author) {
+        if(authors == null) {
+            authors = new ArrayList<>();
+        }
+        authors.add(author);
+    }
 }

@@ -7,21 +7,38 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
+@Table(name = "author")
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer authorID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "author_id")
+    private Integer id;
+
+    @Column(name = "author_name")
+    private String name;
+
+    @Column(name = "author_email")
+    private String email;
+
+    @Column(name = "author_bio")
+    private String bio;
 
     @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private LibraryBook libraryBook;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
+    private List<LibraryBook> books;
 
-    private String authorName;
-
+    public void  addBook(LibraryBook libraryBook) {
+        if(books == null) {
+            books = new ArrayList<>();
+        }
+        books.add(libraryBook);
+    }
 }
