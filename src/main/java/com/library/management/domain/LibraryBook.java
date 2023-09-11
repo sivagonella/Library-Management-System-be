@@ -18,13 +18,13 @@ public class LibraryBook {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "book_id", nullable = false)
-    private Integer bookID;
+    private Integer id;
 
     @Column(name = "book_name", unique = true)
-    private String bookName;
+    private String name;
 
     @Column(name = "number_of_books")
-    private Integer numberOfBooks;
+    private Integer quantity;
 
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
