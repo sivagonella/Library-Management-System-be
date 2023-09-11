@@ -18,6 +18,6 @@ public class UserAuthenticationServiceImpl implements UserAuthenticationService{
 
     @Override
     public User getUserByEmailID(String email) {
-        return userRepository.findByUserEmail(email);
+        return userRepository.findByEmail(email);
     }
 }

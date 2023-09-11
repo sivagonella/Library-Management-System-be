@@ -7,11 +7,11 @@ import java.util.List;
 @Data
 public class LibraryBookDTO implements Serializable {
 
-    private Integer bookID;
+    private Integer id;
 
-    private String bookName;
+    private String name;
 
-    private List<Author> authorNames;
+    private List<Author> authors;
 
-    private Integer numberOfBooks;
+    private Integer quantity;
 }

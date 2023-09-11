@@ -10,7 +10,6 @@ import java.util.List;
 @Service
 public class LibraryBookServiceImpl implements LibraryBookService{
 
-
     @Autowired
     private LibraryBookRepository libraryBookRepository;
 

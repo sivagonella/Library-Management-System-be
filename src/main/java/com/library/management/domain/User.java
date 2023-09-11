@@ -5,26 +5,26 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
-@DynamicUpdate
 @Data
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "user_ID", nullable = false)
-    private Integer userID;
+    private Integer id;
 
-    @Column(name = "firstname", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "lastname", nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
     @Column(name = "email", nullable = false, unique = true)
-    private String userEmail;
+    private String email;
 
     @Column(name = "password", nullable = false)
-    private String userPassword;
+    private String password;
 
     @Column(name = "role", nullable = false)
     private String role;

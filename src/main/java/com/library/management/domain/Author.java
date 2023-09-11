@@ -21,21 +21,20 @@ public class Author {
     @Column(name = "author_id")
     private Integer id;
 
-    @Column(name = "author_name")
+    @Column(name = "author_name", nullable = false)
     private String name;
 
-    @Column(name = "author_email")
+    @Column(name = "author_email", nullable = false)
     private String email;
 
     @Column(name = "author_bio")
     private String bio;
 
-    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<LibraryBook> books;
 
-    public void  addBook(LibraryBook libraryBook) {
+    public void addBook(LibraryBook libraryBook) {
         if(books == null) {
             books = new ArrayList<>();
         }

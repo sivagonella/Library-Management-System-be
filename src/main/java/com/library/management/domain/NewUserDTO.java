@@ -3,9 +3,9 @@ package com.library.management.domain;
 import lombok.Data;
 
 @Data
-public class UserDTO {
+public class NewUserDTO {
 
-    private Integer userID;
+    private Integer id;
 
     private String firstName;
 
