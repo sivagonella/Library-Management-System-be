@@ -8,4 +8,6 @@ public interface AuthorService {
     public Author addAuthor(Author author);
 
     public List<Author> findAll();
+
+    List<Author> findAllByIds(List<Integer> authorIds);
 }

@@ -26,17 +26,18 @@ public class LibraryBookController {
     @Autowired
     private AuthorService authorService;
 
-    @GetMapping(path = "/listBooks")
-    public @ResponseBody List<LibraryBookDTO> findAllBooks() {
+    @GetMapping(path = "/books")
+    public @ResponseBody List<LibraryBooksDTO> findAllBooks() {
 //        List<LibraryBookDTO> libraryBookDTOS = modelMapper.map(libraryBookService.getBooks(), new TypeToken<List<LibraryBookDTO>>() {
 //        }.getType());
-        List<LibraryBookDTO> libraryBookDTOS = libraryBookService.getBooks().stream().map((book) -> modelMapper.map(book, LibraryBookDTO.class)).collect(Collectors.toList());
+        List<LibraryBooksDTO> libraryBookDTOS = libraryBookService.getBooks().stream().map((book) -> modelMapper.map(book, LibraryBooksDTO.class)).collect(Collectors.toList());
         return libraryBookDTOS;
     }
 
-    @PostMapping(path = "/addBook")
+    @PostMapping(path = "/books")
     public @ResponseBody LibraryBookDTO addBook(@RequestBody LibraryBookDTO bookDTO) {
         LibraryBook libraryBook = modelMapper.map(bookDTO, LibraryBook.class);
+        libraryBook.setAuthors(authorService.findAllByIds(bookDTO.getAuthorIds()));
         return modelMapper.map(libraryBookService.addBook(libraryBook), LibraryBookDTO.class);
     }
 
@@ -52,9 +53,17 @@ public class LibraryBookController {
         return authorDTOS;
     }
 
+    @PostMapping(path = "/users/email={email}")
+    public @ResponseBody UserDTO findUser(@PathVariable String email, @RequestBody LoginUserDTO loginUserDTO) {
+        User user = userAuthenticationService.getUserByEmailID(email);
+        if(user != null)
+            return modelMapper.map(user, UserDTO.class);
+        return null;
+    }
+
     @PostMapping(path = "/users")
-    public @ResponseBody NewUserDTO findUser(@RequestBody LoginUserDTO loginUserDTO) {
-        return modelMapper.map(userAuthenticationService.getUserByEmailID(loginUserDTO.getEmail()), NewUserDTO.class);
+    public @ResponseBody UserDTO addUser(UserDTO userDTO) {
+        return modelMapper.map(userAuthenticationService.addUser(modelMapper.map(userDTO, User.class)), UserDTO.class);
     }
 
 }

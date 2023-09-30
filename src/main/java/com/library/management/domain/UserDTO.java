@@ -3,7 +3,7 @@ package com.library.management.domain;
 import lombok.Data;
 
 @Data
-public class NewUserDTO {
+public class UserDTO {
 
     private Integer id;
 
