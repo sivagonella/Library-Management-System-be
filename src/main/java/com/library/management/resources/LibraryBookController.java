@@ -52,18 +52,4 @@ public class LibraryBookController {
         List<AuthorDTO> authorDTOS = authorService.findAll().stream().map((author) -> modelMapper.map(author, AuthorDTO.class)).collect(Collectors.toList());
         return authorDTOS;
     }
-
-    @PostMapping(path = "/users/email={email}")
-    public @ResponseBody UserDTO findUser(@PathVariable String email, @RequestBody LoginUserDTO loginUserDTO) {
-        User user = userAuthenticationService.getUserByEmailID(email);
-        if(user != null)
-            return modelMapper.map(user, UserDTO.class);
-        return null;
-    }
-
-    @PostMapping(path = "/users")
-    public @ResponseBody UserDTO addUser(UserDTO userDTO) {
-        return modelMapper.map(userAuthenticationService.addUser(modelMapper.map(userDTO, User.class)), UserDTO.class);
-    }
-
 }

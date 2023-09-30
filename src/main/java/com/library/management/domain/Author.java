@@ -30,6 +30,7 @@ public class Author {
     @Column(name = "author_bio")
     private String bio;
 
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "author_id"), inverseJoinColumns = @JoinColumn(name = "book_id"))
     private List<LibraryBook> books;
