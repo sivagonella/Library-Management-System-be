@@ -1,12 +1,13 @@
-package com.library.management.services;
+package com.library.management.services.impl;
 
 import com.library.management.domain.User;
 import com.library.management.repositories.UserRepository;
+import com.library.management.services.UserAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserAuthenticationServiceImpl implements UserAuthenticationService{
+public class UserAuthenticationServiceImpl implements UserAuthenticationService {
 
     @Autowired
     private UserRepository userRepository;

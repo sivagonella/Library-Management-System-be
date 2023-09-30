@@ -1,14 +1,15 @@
-package com.library.management.services;
+package com.library.management.services.impl;
 
 import com.library.management.domain.Author;
 import com.library.management.repositories.AuthorRepository;
+import com.library.management.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AuthorServiceImpl implements AuthorService{
+public class AuthorServiceImpl implements AuthorService {
     private AuthorRepository authorRepository;
 
     @Autowired
