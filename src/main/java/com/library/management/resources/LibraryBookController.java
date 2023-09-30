@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Controller
 @CrossOrigin
-@RequestMapping(path = "/demo")
 public class LibraryBookController {
 
     @Autowired
@@ -39,17 +38,5 @@ public class LibraryBookController {
         LibraryBook libraryBook = modelMapper.map(bookDTO, LibraryBook.class);
         libraryBook.setAuthors(authorService.findAllByIds(bookDTO.getAuthorIds()));
         return modelMapper.map(libraryBookService.addBook(libraryBook), LibraryBookDTO.class);
-    }
-
-    @PostMapping(path = "/authors")
-    public @ResponseBody AuthorDTO addAuthor(@RequestBody AuthorDTO authorDTO) {
-        Author author = modelMapper.map(authorDTO, Author.class);
-        return modelMapper.map(authorService.addAuthor(author), AuthorDTO.class);
-    }
-
-    @GetMapping(path = "/authors")
-    public @ResponseBody List<AuthorDTO> findAllAuthors() {
-        List<AuthorDTO> authorDTOS = authorService.findAll().stream().map((author) -> modelMapper.map(author, AuthorDTO.class)).collect(Collectors.toList());
-        return authorDTOS;
     }
 }
