@@ -1,7 +1,7 @@
 package com.library.management.resources;
 
-import com.library.management.domain.Author;
-import com.library.management.domain.AuthorDTO;
+import com.library.management.domain.entity.Author;
+import com.library.management.domain.dto.AuthorDTO;
 import com.library.management.services.AuthorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

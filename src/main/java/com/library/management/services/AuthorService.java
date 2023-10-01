@@ -1,6 +1,6 @@
 package com.library.management.services;
 
-import com.library.management.domain.Author;
+import com.library.management.domain.entity.Author;
 
 import java.util.List;
 

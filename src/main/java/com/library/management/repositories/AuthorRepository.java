@@ -1,7 +1,7 @@
 package com.library.management.repositories;
 
-import com.library.management.domain.Author;
-import com.library.management.domain.LibraryBook;
+import com.library.management.domain.entity.Author;
+import com.library.management.domain.entity.LibraryBook;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

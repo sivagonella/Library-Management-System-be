@@ -1,8 +1,8 @@
 package com.library.management.resources;
 
-import com.library.management.domain.LoginUserDTO;
-import com.library.management.domain.User;
-import com.library.management.domain.UserDTO;
+import com.library.management.domain.dto.LoginUserDTO;
+import com.library.management.domain.entity.User;
+import com.library.management.domain.dto.UserDTO;
 import com.library.management.services.UserAuthenticationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

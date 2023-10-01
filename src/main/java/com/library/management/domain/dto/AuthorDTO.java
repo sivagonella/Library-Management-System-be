@@ -1,5 +1,6 @@
-package com.library.management.domain;
+package com.library.management.domain.dto;
 
+import com.library.management.domain.entity.LibraryBook;
 import lombok.Data;
 
 import java.io.Serializable;

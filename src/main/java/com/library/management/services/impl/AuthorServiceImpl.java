@@ -1,6 +1,6 @@
 package com.library.management.services.impl;
 
-import com.library.management.domain.Author;
+import com.library.management.domain.entity.Author;
 import com.library.management.repositories.AuthorRepository;
 import com.library.management.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
