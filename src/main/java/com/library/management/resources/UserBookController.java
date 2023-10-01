@@ -1,5 +1,6 @@
 package com.library.management.resources;
 
+import com.library.management.domain.dto.CheckedBookDTO;
 import com.library.management.domain.dto.CheckedBooksDTO;
 import com.library.management.domain.dto.UserBookDTO;
 import com.library.management.domain.entity.LibraryBook;
@@ -42,14 +43,11 @@ public class UserBookController {
     @GetMapping(path = "/getCheckedBooks/userId={userId}")
     public @ResponseBody CheckedBooksDTO getCheckedBooks(@PathVariable Integer userId) {
         List<UserBook> userBookList = userBookService.findAllBorrowedBooks(userId);
-        List<LibraryBook> borrowedBooks = new ArrayList<>();
-        List<Integer> borrowedQuantities = new ArrayList<>();
-        List<Date> borrowedDates = new ArrayList<>();
-        for(int i = 0; i < userBookList.size(); i++) {
-            borrowedBooks.add(libraryBookService.getBookById(userBookList.get(i).getBookId()));
-            borrowedQuantities.add(userBookList.get(i).getBorrowedQuantity());
-            borrowedDates.add(userBookList.get(i).getDate());
+        CheckedBooksDTO checkedBooksDTO = new CheckedBooksDTO();
+        for(UserBook userBook : userBookList) {
+            LibraryBook libraryBook = libraryBookService.getBookById(userBook.getBookId());
+            checkedBooksDTO.getCheckedBookDTOs().add(new CheckedBookDTO(libraryBook, userBook.getBorrowedQuantity(), userBook.getDate()));
         }
-        return new CheckedBooksDTO(borrowedBooks, borrowedQuantities, borrowedDates);
+        return checkedBooksDTO;
     }
 }

@@ -4,21 +4,17 @@ import com.library.management.domain.entity.LibraryBook;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
 public class CheckedBooksDTO implements Serializable {
 
-    private List<LibraryBook> borrowedBooks;
+    private List<CheckedBookDTO> checkedBookDTOs;
 
-    private List<Integer> borrowedQuantities;
-
-    private List<Date> borrowedDates;
-
-    public CheckedBooksDTO(List<LibraryBook> borrowedBooks, List<Integer> borrowedQuantities, List<Date> borrowedDates) {
-        this.borrowedBooks = borrowedBooks;
-        this.borrowedQuantities = borrowedQuantities;
-        this.borrowedDates = borrowedDates;
+    public CheckedBooksDTO() {
+        checkedBookDTOs = new ArrayList<>();
     }
+
 }
