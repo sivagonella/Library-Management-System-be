@@ -29,20 +29,16 @@ public class UserBook {
     @Column(name = "borrowed_quantity", nullable = false)
     private Integer borrowedQuantity;
 
-    @Column(name = "returned_quantity", nullable = false)
-    private Integer returnedQuantity;
-
     @Enumerated(EnumType.STRING)
     private BorrowedStatus borrowedStatus;
 
     @Column(name = "date", nullable = false)
     private Date borrowedDate;
 
-    public UserBook(Integer userId, int bookId, int borrowedQuantity, int returnedQuantity, BorrowedStatus borrowedStatus, Date borrowedDate) {
+    public UserBook(Integer userId, int bookId, int borrowedQuantity, BorrowedStatus borrowedStatus, Date borrowedDate) {
         this.userId = userId;
         this.bookId = bookId;
         this.borrowedQuantity = borrowedQuantity;
-        this.returnedQuantity = returnedQuantity;
         this.borrowedStatus = borrowedStatus;
         this.borrowedDate = borrowedDate;
     }
