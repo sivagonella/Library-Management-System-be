@@ -52,7 +52,11 @@ public class UserBookServiceImpl implements UserBookService {
         if(userBook.getBorrowedQuantity() > returnedQuantity) {
             System.out.println("Transaction ID: " + userBook.getTransactionUUID());
             System.out.println("This is the already returned value: " + transactionOrderDetailRepository.findNumberOfReturnedBooks(userBook.getTransactionUUID()));
-            if(transactionOrderDetailRepository.findNumberOfReturnedBooks(userBook.getTransactionUUID()) + returnedQuantity == userBook.getBorrowedQuantity()) {
+            Integer numberOfReturnedBooks = transactionOrderDetailRepository.findNumberOfReturnedBooks(userBook.getTransactionUUID());
+            int totalReturnedBooks = 0;
+            if(numberOfReturnedBooks != null)
+                totalReturnedBooks += numberOfReturnedBooks;
+            if(totalReturnedBooks + returnedQuantity == userBook.getBorrowedQuantity()) {
                 userBook.setBorrowedStatus(BorrowedStatus.RETURNED);
             }
             else {
