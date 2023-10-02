@@ -18,5 +18,4 @@ public class UserBookDTO implements Serializable {
 
     private BorrowedStatus borrowedStatus;
 
-    private Date borrowedDate;
 }

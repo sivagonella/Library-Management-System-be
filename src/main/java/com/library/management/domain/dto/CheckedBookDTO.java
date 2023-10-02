@@ -15,5 +15,7 @@ public class CheckedBookDTO {
 
     private Integer quantity;
 
-    private Date date;
+    private Date borrowedDate;
+
+    private Date returnDate;
 }

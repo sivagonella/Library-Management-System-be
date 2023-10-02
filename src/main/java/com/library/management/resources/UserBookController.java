@@ -34,7 +34,7 @@ public class UserBookController {
         System.out.println(userBookDTO);
         for(int bookId : userBookDTO.getBookIds()) {
             int borrowedQuantity = userBookDTO.getBorrowedQuantities().get(userBookDTO.getBookIds().indexOf(bookId));
-            UserBook userBook = new UserBook(userBookDTO.getUserId(), bookId, borrowedQuantity, userBookDTO.getBorrowedStatus(), userBookDTO.getBorrowedDate());
+            UserBook userBook = new UserBook(userBookDTO.getUserId(), bookId, borrowedQuantity, 0, userBookDTO.getBorrowedStatus(), new Date());
             userBookService.borrowBook(userBook);
         }
         return "Success";
@@ -46,7 +46,10 @@ public class UserBookController {
         CheckedBooksDTO checkedBooksDTO = new CheckedBooksDTO();
         for(UserBook userBook : userBookList) {
             LibraryBook libraryBook = libraryBookService.getBookById(userBook.getBookId());
-            checkedBooksDTO.getCheckedBookDTOs().add(new CheckedBookDTO(libraryBook, userBook.getBorrowedQuantity(), userBook.getDate()));
+            Date returnDate = new Date(userBook.getBorrowedDate().getTime());
+            returnDate.setTime(userBook.getBorrowedDate().getTime() + 30L * 1000 * 60 * 60 * 24);
+            checkedBooksDTO.getCheckedBookDTOs().add(new CheckedBookDTO(libraryBook, userBook.getBorrowedQuantity(), userBook.getBorrowedDate(), returnDate));
+            System.out.println(userBook.getBorrowedDate() + " " + returnDate.getDate());
         }
         return checkedBooksDTO;
     }
