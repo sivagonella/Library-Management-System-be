@@ -13,7 +13,7 @@ import java.util.Date;
 public class CheckedBookDTO {
     private LibraryBook libraryBook;
 
-    private Integer quantity;
+    private int quantity;
 
     private Date borrowedDate;
 

@@ -12,7 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "user_ID", nullable = false)
-    private Integer id;
+    private int id;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;

@@ -21,13 +21,13 @@ public class UserBook {
     private UUID transactionUUID;
 
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private int userId;
 
     @Column(name = "book_id", nullable = false)
-    private Integer bookId;
+    private int bookId;
 
     @Column(name = "borrowed_quantity", nullable = false)
-    private Integer borrowedQuantity;
+    private int borrowedQuantity;
 
     @Enumerated(EnumType.STRING)
     private BorrowedStatus borrowedStatus;

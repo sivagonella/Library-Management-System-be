@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-    private Integer id;
+    private int id;
 
     private String firstName;
 
@@ -15,5 +15,5 @@ public class UserDTO {
 
     private String role;
 
-    private Integer isCorrectPassword = 1;
+    private int isCorrectPassword = 1;
 }

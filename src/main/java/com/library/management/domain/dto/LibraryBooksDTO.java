@@ -9,11 +9,11 @@ import java.util.List;
 @Data
 public class LibraryBooksDTO implements Serializable {
 
-    private Integer id;
+    private int id;
 
     private String name;
 
     private List<Author> authors;
 
-    private Integer quantity;
+    private int quantity;
 }

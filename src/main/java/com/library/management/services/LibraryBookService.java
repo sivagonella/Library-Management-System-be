@@ -10,7 +10,7 @@ public interface LibraryBookService {
 
     LibraryBook addBook(LibraryBook libraryBook);
 
-    boolean updateBookCount(Integer bookId, Integer borrowedQuantity, BorrowedStatus borrowedStatus);
+    boolean updateBookCount(int bookId, int borrowedQuantity, BorrowedStatus borrowedStatus);
 
-    LibraryBook getBookById(Integer bookId);
+    LibraryBook getBookById(int bookId);
 }

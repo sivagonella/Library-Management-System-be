@@ -38,7 +38,7 @@ public class UserBookServiceImpl implements UserBookService {
     }
 
     @Override
-    public boolean returnBook(UserBook userBook, Integer returnedQuantity) {
+    public boolean returnBook(UserBook userBook, int returnedQuantity) {
         if(returnedQuantity == 0) {
             return false;
         }
@@ -71,7 +71,7 @@ public class UserBookServiceImpl implements UserBookService {
     }
 
     @Override
-    public List<UserBook> findAllBorrowedBooks(Integer userId) {
+    public List<UserBook> findAllBorrowedBooks(int userId) {
         List<UserBook> borrowedBooks = new ArrayList<>();
         borrowedBooks.addAll(userBookRepository.findByUserIdAndBorrowedStatus(userId, BorrowedStatus.BORROWED));
         List<UserBook> partiallyReturnedBooks = userBookRepository.findByUserIdAndBorrowedStatus(userId, BorrowedStatus.PARTIALLY_RETURNED);
@@ -88,7 +88,7 @@ public class UserBookServiceImpl implements UserBookService {
     }
 
     @Override
-    public UserBook findByBookIdAndUserId(Integer bookId, Integer userId) {
+    public UserBook findByBookIdAndUserId(int bookId, int userId) {
         List<BorrowedStatus> statuses = new ArrayList<>();
         statuses.add(BorrowedStatus.PARTIALLY_RETURNED);
         statuses.add(BorrowedStatus.BORROWED);

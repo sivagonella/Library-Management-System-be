@@ -24,7 +24,7 @@ public class TransactionOrderDetail {
     private UserBook userBook;
 
     @Column(name = "returned_quantity")
-    private Integer returnedQuantity;
+    private int returnedQuantity;
 
     @Column(name = "returned_date")
     private Date returnedDate;

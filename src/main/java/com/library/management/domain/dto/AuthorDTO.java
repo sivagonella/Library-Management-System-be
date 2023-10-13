@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class AuthorDTO implements Serializable {
-    private Integer id;
+    private int id;
     private String name;
     private String email;
     private String bio;

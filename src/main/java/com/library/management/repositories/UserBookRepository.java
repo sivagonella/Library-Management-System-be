@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface UserBookRepository extends CrudRepository<UserBook, Integer> {
 
-    List<UserBook> findByUserId(Integer userId);
+    List<UserBook> findByUserId(int userId);
 
-    UserBook findByBookIdAndUserId(Integer bookId, Integer userId);
+    UserBook findByBookIdAndUserId(int bookId, int userId);
 
-    List<UserBook> findByUserIdAndBorrowedStatus(Integer userId, BorrowedStatus borrowedStatus);
+    List<UserBook> findByUserIdAndBorrowedStatus(int userId, BorrowedStatus borrowedStatus);
 
-    UserBook findByBookIdAndUserIdAndBorrowedStatusIn(Integer bookId, Integer userId, List<BorrowedStatus> statuses);
+    UserBook findByBookIdAndUserIdAndBorrowedStatusIn(int bookId, int userId, List<BorrowedStatus> statuses);
 }

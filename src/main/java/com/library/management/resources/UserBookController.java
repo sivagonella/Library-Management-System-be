@@ -39,7 +39,7 @@ public class UserBookController {
     }
 
     @GetMapping(path = "/getCheckedBooks/userId={userId}")
-    public @ResponseBody CheckedBooksDTO getCheckedBooks(@PathVariable Integer userId) {
+    public @ResponseBody CheckedBooksDTO getCheckedBooks(@PathVariable int userId) {
         List<UserBook> userBookList = userBookService.findAllBorrowedBooks(userId);
         CheckedBooksDTO checkedBooksDTO = new CheckedBooksDTO();
         for(UserBook userBook : userBookList) {
@@ -53,7 +53,7 @@ public class UserBookController {
     }
 
     @PostMapping(path = "/returnBooks/userId={userId}")
-    public @ResponseBody ReturnedBooksDTO returnBooks(@PathVariable Integer userId, @RequestBody ReturnedBooksDTO returnedBooksDTO) {
+    public @ResponseBody ReturnedBooksDTO returnBooks(@PathVariable int userId, @RequestBody ReturnedBooksDTO returnedBooksDTO) {
         for(ReturnedBookDTO returnedBookDTO : returnedBooksDTO.getReturnedBookDTOList()) {
             UserBook userBook = userBookService.findByBookIdAndUserId(returnedBookDTO.getBookId(), userId);
             System.out.println(userBook);

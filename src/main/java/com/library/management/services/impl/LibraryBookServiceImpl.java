@@ -27,7 +27,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
     }
 
     @Override
-    public boolean updateBookCount(Integer bookId, Integer quantity, BorrowedStatus borrowedStatus) {
+    public boolean updateBookCount(int bookId, int quantity, BorrowedStatus borrowedStatus) {
         Optional<LibraryBook> optionalLibraryBook = libraryBookRepository.findById(bookId);
         if(optionalLibraryBook.isPresent()) {
             LibraryBook libraryBook = optionalLibraryBook.get();
@@ -45,7 +45,7 @@ public class LibraryBookServiceImpl implements LibraryBookService {
     }
 
     @Override
-    public LibraryBook getBookById(Integer bookId) {
+    public LibraryBook getBookById(int bookId) {
         Optional<LibraryBook> optionalLibraryBook = libraryBookRepository.findById(bookId);
         if(optionalLibraryBook.isPresent()) {
             return optionalLibraryBook.get();

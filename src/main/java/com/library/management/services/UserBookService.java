@@ -7,9 +7,9 @@ import java.util.List;
 public interface UserBookService {
     boolean borrowBook(UserBook userBook);
 
-    boolean returnBook(UserBook userBook, Integer returnedQuantity);
+    boolean returnBook(UserBook userBook, int returnedQuantity);
 
-    List<UserBook> findAllBorrowedBooks(Integer userId);
+    List<UserBook> findAllBorrowedBooks(int userId);
 
-    UserBook findByBookIdAndUserId(Integer bookId, Integer userId);
+    UserBook findByBookIdAndUserId(int bookId, int userId);
 }

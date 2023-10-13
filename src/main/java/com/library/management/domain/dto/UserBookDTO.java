@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class UserBookDTO implements Serializable {
 
-    private Integer userId;
+    private int userId;
 
     private List<Integer> bookIds;
 

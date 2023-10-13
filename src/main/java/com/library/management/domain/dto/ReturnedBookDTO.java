@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ReturnedBookDTO {
 
-    private Integer bookId;
+    private int bookId;
 
-    private Integer returnedQuantity;
+    private int returnedQuantity;
 }
