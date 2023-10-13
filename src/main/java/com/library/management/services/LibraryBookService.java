@@ -1,12 +1,13 @@
 package com.library.management.services;
 
+import com.library.management.domain.dto.LibraryBooksDTO;
 import com.library.management.domain.entity.LibraryBook;
 import com.library.management.domain.entity.enums.BorrowedStatus;
 
 import java.util.List;
 
 public interface LibraryBookService {
-    List<LibraryBook> getBooks();
+    LibraryBooksDTO getBooks(int pageNo, int pageSize);
 
     LibraryBook addBook(LibraryBook libraryBook);
 

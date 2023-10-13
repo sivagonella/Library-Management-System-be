@@ -29,18 +29,11 @@ public class LibraryBookController {
     @Autowired
     private LibraryBookService libraryBookService;
     @Autowired
-    private UserAuthenticationService userAuthenticationService;
-    @Autowired
     private AuthorService authorService;
 
-    @Autowired
-    private UserBookService userBookService;
-
     @GetMapping(path = "/books")
-    public ResponseEntity<List<LibraryBooksDTO>> findAllBooks() {
-//        List<LibraryBookDTO> libraryBookDTOS = modelMapper.map(libraryBookService.getBooks(), new TypeToken<List<LibraryBookDTO>>() {
-//        }.getType());
-        List<LibraryBooksDTO> libraryBookDTOS = libraryBookService.getBooks().stream().map((book) -> modelMapper.map(book, LibraryBooksDTO.class)).collect(Collectors.toList());
+    public ResponseEntity<LibraryBooksDTO> findAllBooks(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo, @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+        LibraryBooksDTO libraryBookDTOS = libraryBookService.getBooks(pageNo, pageSize);
         return new ResponseEntity<>(libraryBookDTOS, HttpStatus.OK);
     }
 
