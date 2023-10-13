@@ -5,6 +5,8 @@ import com.library.management.domain.dto.AuthorDTO;
 import com.library.management.services.AuthorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +27,15 @@ public class AuthorController {
     }
 
     @PostMapping(path = "/authors")
-    public @ResponseBody AuthorDTO addAuthor(@RequestBody AuthorDTO authorDTO) {
+    public ResponseEntity<AuthorDTO> addAuthor(@RequestBody AuthorDTO authorDTO) {
         Author author = modelMapper.map(authorDTO, Author.class);
-        return modelMapper.map(authorService.addAuthor(author), AuthorDTO.class);
+        AuthorDTO responseBody = modelMapper.map(authorService.addAuthor(author), AuthorDTO.class);
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 
     @GetMapping(path = "/authors")
-    public @ResponseBody List<AuthorDTO> findAllAuthors() {
+    public ResponseEntity<List<AuthorDTO>> findAllAuthors() {
         List<AuthorDTO> authorDTOS = authorService.findAll().stream().map((author) -> modelMapper.map(author, AuthorDTO.class)).collect(Collectors.toList());
-        return authorDTOS;
+        return new ResponseEntity<>(authorDTOS, HttpStatus.OK);
     }
 }

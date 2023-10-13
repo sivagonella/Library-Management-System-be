@@ -12,6 +12,8 @@ import com.library.management.services.UserAuthenticationService;
 import com.library.management.services.UserBookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,17 +37,18 @@ public class LibraryBookController {
     private UserBookService userBookService;
 
     @GetMapping(path = "/books")
-    public @ResponseBody List<LibraryBooksDTO> findAllBooks() {
+    public ResponseEntity<List<LibraryBooksDTO>> findAllBooks() {
 //        List<LibraryBookDTO> libraryBookDTOS = modelMapper.map(libraryBookService.getBooks(), new TypeToken<List<LibraryBookDTO>>() {
 //        }.getType());
         List<LibraryBooksDTO> libraryBookDTOS = libraryBookService.getBooks().stream().map((book) -> modelMapper.map(book, LibraryBooksDTO.class)).collect(Collectors.toList());
-        return libraryBookDTOS;
+        return new ResponseEntity<>(libraryBookDTOS, HttpStatus.OK);
     }
 
     @PostMapping(path = "/books")
-    public @ResponseBody LibraryBookDTO addBook(@RequestBody LibraryBookDTO bookDTO) {
+    public ResponseEntity<LibraryBookDTO> addBook(@RequestBody LibraryBookDTO bookDTO) {
         LibraryBook libraryBook = modelMapper.map(bookDTO, LibraryBook.class);
         libraryBook.setAuthors(authorService.findAllByIds(bookDTO.getAuthorIds()));
-        return modelMapper.map(libraryBookService.addBook(libraryBook), LibraryBookDTO.class);
+        LibraryBookDTO responseBody = modelMapper.map(libraryBookService.addBook(libraryBook), LibraryBookDTO.class);
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 }

@@ -6,6 +6,8 @@ import com.library.management.domain.dto.UserDTO;
 import com.library.management.services.UserAuthenticationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,15 +26,19 @@ public class UserController {
     }
 
     @PostMapping(path = "/users/email={email}")
-    public @ResponseBody UserDTO findUser(@PathVariable String email, @RequestBody LoginUserDTO loginUserDTO) {
+    public ResponseEntity<UserDTO> findUser(@PathVariable String email, @RequestBody LoginUserDTO loginUserDTO) {
         User user = userAuthenticationService.getUserByEmailID(email);
-        if(user != null)
-            return modelMapper.map(user, UserDTO.class);
-        return null;
+        UserDTO responseBody = null;
+        if(user != null){
+            responseBody = modelMapper.map(user, UserDTO.class);
+            return new ResponseEntity<>(responseBody, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(responseBody, HttpStatus.FORBIDDEN);
     }
 
     @PostMapping(path = "/users")
-    public @ResponseBody UserDTO addUser(UserDTO userDTO) {
-        return modelMapper.map(userAuthenticationService.addUser(modelMapper.map(userDTO, User.class)), UserDTO.class);
+    public ResponseEntity<UserDTO> addUser(UserDTO userDTO) {
+        UserDTO responseBody = modelMapper.map(userAuthenticationService.addUser(modelMapper.map(userDTO, User.class)), UserDTO.class);
+        return new ResponseEntity<>(responseBody, HttpStatus.OK);
     }
 }
