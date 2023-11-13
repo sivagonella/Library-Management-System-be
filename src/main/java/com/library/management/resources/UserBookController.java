@@ -48,7 +48,7 @@ public class UserBookController {
             LibraryBook libraryBook = libraryBookService.getBookById(userBook.getBookId());
             Date returnDate = new Date(userBook.getBorrowedDate().getTime());
             returnDate.setTime(userBook.getBorrowedDate().getTime() + 30L * 1000 * 60 * 60 * 24);
-            checkedBooksDTO.getCheckedBookDTOs().add(new CheckedBookDTO(libraryBook, userBook.getBorrowedQuantity(), userBook.getBorrowedDate(), returnDate));
+            checkedBooksDTO.getCheckedBookDTOs().add(new CheckedBookDTO(userBook.getTransactionUUID(), libraryBook, userBook.getBorrowedQuantity(), userBook.getBorrowedDate(), returnDate));
             System.out.println(userBook.getBorrowedDate() + " " + returnDate.getDate());
         }
         return new ResponseEntity<>(checkedBooksDTO, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class UserBookController {
     @PostMapping(path = "/returnBooks/userId={userId}")
     public ResponseEntity<ReturnedBooksDTO> returnBooks(@PathVariable int userId, @RequestBody ReturnedBooksDTO returnedBooksDTO) {
         for(ReturnedBookDTO returnedBookDTO : returnedBooksDTO.getReturnedBookDTOList()) {
-            UserBook userBook = userBookService.findByBookIdAndUserId(returnedBookDTO.getBookId(), userId);
+            UserBook userBook = userBookService.findByTransactionUUIDAndBookIdAndUserId(returnedBookDTO.getTransactionUUID(), returnedBookDTO.getBookId(), userId);
             System.out.println(userBook);
             userBookService.returnBook(userBook, returnedBookDTO.getReturnedQuantity());
         }

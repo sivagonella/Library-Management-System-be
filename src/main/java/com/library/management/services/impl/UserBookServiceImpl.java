@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserBookServiceImpl implements UserBookService {
@@ -88,10 +89,10 @@ public class UserBookServiceImpl implements UserBookService {
     }
 
     @Override
-    public UserBook findByBookIdAndUserId(int bookId, int userId) {
+    public UserBook findByTransactionUUIDAndBookIdAndUserId(UUID transactionUUID, int bookId, int userId) {
         List<BorrowedStatus> statuses = new ArrayList<>();
         statuses.add(BorrowedStatus.PARTIALLY_RETURNED);
         statuses.add(BorrowedStatus.BORROWED);
-        return userBookRepository.findByBookIdAndUserIdAndBorrowedStatusIn(bookId, userId, statuses);
+        return userBookRepository.findByTransactionUUIDAndBookIdAndUserIdAndBorrowedStatusIn(transactionUUID, bookId, userId, statuses);
     }
 }
